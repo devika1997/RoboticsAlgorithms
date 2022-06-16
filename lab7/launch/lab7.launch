@@ -1,0 +1,11 @@
+<launch>
+	<node name="cc" pkg="lab7" type="CameraCallibration.py" output="screen">
+		<param name="imagepath" type="string" value="$(find lab7)/images/" />
+	</node>
+	<node pkg="rosbag" type="play" name="player" args="$(find lab7)/data/PA7.bag" respawn="true"/>
+	<node pkg="rviz" type="rviz" 
+		name="rviz" args="-d $(find lab7)/rviz/default.rviz"/>
+	<node name="depth" pkg="lab7" type="depth.py">
+		<param name="frameindex" type="int" value="17"/>
+	</node>
+</launch>

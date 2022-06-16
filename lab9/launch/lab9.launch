@@ -1,0 +1,3 @@
+<launch>
+	<node name="grid" pkg="lab9" type="grid_localization.py" output="screen"/>
+</launch>

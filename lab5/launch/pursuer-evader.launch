@@ -1,0 +1,16 @@
+<launch>
+	<param name="/use_sim_time" value="true"/>
+	<node name="stage" pkg="stage_ros" type="stageros"
+	      args="$(find lab5)/world/playground1.world" />
+	<node name="evader" pkg="lab5" type="evader.py" >
+	 <remap from="/cmd_vel" to="/robot_0/cmd_vel"/>
+	 <remap from="/base_scan" to="/robot_0/base_scan"/>
+	</node>
+	<node name="robot0_broadcast" pkg="lab5" type="Broadcaster.py" >
+		<param name="robot" type="string" value="robot_0" />
+	</node>
+	<node name="robot1_broadcast" pkg="lab5" type="Broadcaster.py" >
+		<param name="robot" type="string" value="robot_1" />
+	</node>
+	<node name="listen" pkg="lab5" type="Listener.py" respawn="true"/>
+</launch>
